@@ -122,7 +122,7 @@ public function indexAdmin()
         where('usuario_admin_compra_id', $usuarioActual->id)
         ->where('estado_solicitud','vigente')
         ->orderBy('created_at', 'desc')
-        ->get();
+        ->paginate(10);
 
     // Retorna la vista con los productos
     return view('admin_compras.pendientes', compact('productos'));

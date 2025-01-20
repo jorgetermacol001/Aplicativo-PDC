@@ -33,14 +33,14 @@ class SolicitanteController extends Controller
 // Funcion para traer las compras del solicitante
 public function misCompras()
 {
-        // Obtener el usuario autenticado
-        $usuarioActual = auth()->user();
+    // Obtener el usuario autenticado
+    $usuarioActual = auth()->user();
 
     // Obtener todas las compras del usuario solicitante donde estado_proyecto sea 'VIGENTE'
     $productos = Productos::where('usuario_solicitante_id', $usuarioActual->id)
         ->where('estado_solicitud', 'vigente') // Filtrar productos con estado_proyecto 'VIGENTE'
         ->orderBy('created_at', 'desc')
-        ->get();
+        ->paginate(10);
 
     return view('solicitante.compras', compact('productos'));
 }

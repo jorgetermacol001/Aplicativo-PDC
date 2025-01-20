@@ -85,6 +85,12 @@
                 </tbody>
             </table>
         </div>
+                            {{-- Navegación de paginación --}}
+                            <div class="d-flex justify-content-center mt-3">
+                                <ul class="pagination pagination-sm">
+                                    {{ $productos->links('pagination::bootstrap-4') }}
+                                </ul>
+                            </div>
     </div>
 @stop
 

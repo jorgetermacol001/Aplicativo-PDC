@@ -15,13 +15,14 @@ class AprobadorController extends Controller
 {
     public function pendientes()
     {
-        // Obtiene las compras asignadas al aprobador actual
-        $productos = Productos::where('usuario_aprobador_id', auth()->id()) // Compara con el ID del usuario autenticado
-            ->where('estado_solicitud', 'vigente') // Filtrar solo los proyectos vigentes
-            ->get();
+        $productos = Productos::where('usuario_aprobador_id', auth()->id())
+            ->where('estado_solicitud', 'vigente')
+            ->orderBy('created_at', 'desc')
+            ->paginate(10);
     
         return view('aprobador.pendientes', compact('productos'));
     }
+    
     
     public function show($id)
     {

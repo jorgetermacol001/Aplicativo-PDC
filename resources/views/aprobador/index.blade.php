@@ -46,5 +46,10 @@
                 <p class="text-muted">No se pueden realizar acciones sobre esta productos.</p>
             @endif
         </div>
+
+
+        
     </div>
+
+
 @stop

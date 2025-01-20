@@ -26,7 +26,7 @@ class AlmacenistaController extends Controller
                       //->orWhere('estado_pago', 'pago programado');
             })
             ->orderBy('created_at', 'desc')
-            ->get();
+            ->paginate(10);
     
         // Retorna la vista con los productos
         return view('almacenista.index', compact('productos'));
