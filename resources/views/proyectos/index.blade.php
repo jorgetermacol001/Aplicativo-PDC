@@ -82,39 +82,41 @@
         </div>
     </div>
 
-    <!-- Modal para filtros -->
-    <div class="modal fade" id="filterModal" tabindex="-1" aria-labelledby="filterModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header bg-orange">
-                    <h5 class="modal-title" id="filterModalLabel">Filtrar Proyectos</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Cerrar">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
+        <!-- Modal para filtros -->
+        <div class="modal fade" id="filterModal" tabindex="-1" aria-labelledby="filterModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header bg-orange">
+                        <h5 class="modal-title" id="filterModalLabel">Filtrar Proyectos</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Cerrar">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <form method="GET" action="{{ route('proyectos.index') }}">
+                        <div class="modal-body">
+                            <div class="form-group">
+                                <label for="nombre">Nombre</label>
+                                <input type="text" name="nombre" id="nombre" class="form-control" placeholder="Ingrese el nombre" value="{{ request('nombre') }}">
+                            </div>
+                            <div class="form-group">
+                                <label for="estado_proyecto">Estado del Proyecto</label>
+                                <select name="estado_proyecto" id="estado_proyecto" class="form-control">
+                                    @foreach ($estadoProyecto as $estado)
+                                        <option value="{{ $estado }}" {{ request('estado_proyecto') == $estado ? 'selected' : '' }}>{{ $estado }}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                            <button type="submit" class="btn btn-primary">Aplicar Filtros</button>
+                            <a href="{{ route('proyectos.index') }}" class="btn btn-danger">Quitar Filtros</a>
+                        </div>
+                    </form>
                 </div>
-                <form method="GET" action="{{ route('proyectos.index') }}">
-                    <div class="modal-body">
-                        <div class="form-group">
-                            <label for="nombre">Nombre</label>
-                            <input type="text" name="nombre" id="nombre" class="form-control" placeholder="Ingrese el nombre">
-                        </div>
-                        <div class="form-group">
-                            <label for="estado_proyecto">Estado del Proyecto</label>
-                            <select name="estado_proyecto" id="estado_proyecto" class="form-control">
-                                @foreach ($estadoProyecto as $estado)
-                                    <option value="{{ $estado }}" {{ request('estado_oc') == $estado ? 'selected' : '' }}>{{ $estado }}</option>
-                                @endforeach
-                            </select>
-                        </div>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
-                        <button type="submit" class="btn btn-primary">Aplicar Filtros</button>
-                    </div>
-                </form>
             </div>
         </div>
-    </div>
+
 @stop
 
 @section('css')

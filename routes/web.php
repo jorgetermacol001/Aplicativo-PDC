@@ -56,6 +56,9 @@ Route::group([ 'middleware'=> 'auth', 'role:admin'], function () {
         Route::get('productos/edit/{id}', [ProductosController::class, 'edit'])->name('productos.edit');
         Route::patch('/productos/update/{id}', [ProductosController::class, 'update'])->name('productos.update');
         Route::put('productos/terminar/{id}', [ProductosController::class, 'TerminarSolicitud'])->name('productos.terminar');
+        Route::delete('/productos/{producto}/enlaces/{enlace}', [ProductosController::class, 'deleteEnlace'])
+    ->name('productos.enlaces.delete');
+
        
     
 });  

@@ -121,6 +121,7 @@
                             <button type="button" class="btn btn-secondary btn-sm" data-dismiss="modal">
                                 <i class="fas fa-times"></i> Cancelar
                             </button>
+                            <a href="{{ route('productos.index') }}" class="btn btn-danger">Quitar Filtros</a>
                         </div>
                     </form>
                 </div>

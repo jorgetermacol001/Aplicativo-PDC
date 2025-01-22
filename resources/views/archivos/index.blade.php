@@ -73,6 +73,7 @@
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
                         <button type="submit" class="btn btn-primary">Aplicar Filtros</button>
+                        <a href="{{ route('archivos.index') }}" class="btn btn-danger">Quitar Filtros</a>
                     </div>
                 </form>
             </div>

@@ -252,41 +252,40 @@ public function show($id)
             'enlaces_sharepoint.*.url' => 'required|url',
             'enlaces_sharepoint.*.nombre_original' => 'required|string|max:255',
         ]);
-        
+    
         $producto = Productos::findOrFail($id);
+    
         // Actualizar los campos del producto
         $producto->update([
             'nombre' => $request->nombre,
-            'observaciones' => $request->observaciones,  // Incluido el campo observaciones
+            'observaciones' => $request->observaciones,
             'proyecto_id' => $request->proyecto_id,
             'tipo_de_pago' => $request->tipo_de_pago,
             'usuario_aprobador_id' => $request->usuario_aprobador_id,
             'usuario_admin_compra_id' => $request->usuario_admin_compra_id,
             'usuario_almacenista_id' => $request->usuario_almacenista_id,
-            'contacto_proveedores' => $request->contacto_proveedores,  // Incluido el campo contacto_proveedores
+            'contacto_proveedores' => $request->contacto_proveedores,
         ]);
     
-        // Determinar el rol del usuario autenticado
-        $rolUsuario = strtolower(auth()->user()->getRoleNames()->first()); // Ejemplo: 'solicitante', 'admin_compra', 'almacenista'
-    
-        // Eliminar los enlaces SharePoint existentes para este producto antes de agregar los nuevos
-        // Si no deseas borrar los enlaces anteriores, puedes omitir esta línea
-        $producto->enlaces()->delete();
-    
-        // Manejo de enlaces SharePoint
-        if ($request->has('enlaces_sharepoint')) {
-            foreach ($request->enlaces_sharepoint as $enlace) {
-                $producto->enlaces()->create([
-                    'nombre_original' => $enlace['nombre_original'],
-                    'url_sharepoint' => $enlace['url'],
-                    'rol' => $rolUsuario, // Asignar automáticamente el rol del usuario autenticado
-                ]);
+        // Actualizar los enlaces existentes
+        foreach ($request->enlaces_sharepoint as $enlace) {
+            if (isset($enlace['id'])) {
+                // Obtener el enlace existente
+                $enlaceExistente = $producto->enlaces()->find($enlace['id']);
+                if ($enlaceExistente) {
+                    // Actualizar solo los campos permitidos
+                    $enlaceExistente->update([
+                        'nombre_original' => $enlace['nombre_original'],
+                        'url_sharepoint' => $enlace['url'],
+                    ]);
+                }
             }
         }
     
         // Redirigir con mensaje de éxito
-        return redirect()->route('productos.index')->with('success', 'Producto actualizado correctamente con sus enlaces de SharePoint.');
+        return redirect()->route('productos.index')->with('success', 'Producto actualizado correctamente.');
     }
+    
     
     
     /**
@@ -335,6 +334,18 @@ public function show($id)
         return redirect()->route('productos.index')->with('success', 'Proyecto marcado como terminado exitosamente.');
     }
 
-    
+    public function deleteEnlace($productoId, $enlaceId){
+    // Buscar el producto y el enlace relacionado
+    $producto = Productos::findOrFail($productoId);
+    $enlace = $producto->enlaces()->findOrFail($enlaceId);
+
+    // Eliminar el enlace
+    $enlace->delete();
+
+    // Redirigir con un mensaje de éxito
+    return redirect()->route('productos.edit', $productoId)
+        ->with('success', 'Enlace eliminado correctamente.');
+    }
+
 
 }    

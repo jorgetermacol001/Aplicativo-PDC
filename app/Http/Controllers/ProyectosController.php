@@ -139,7 +139,6 @@ class ProyectosController extends Controller
             abort(403, 'No tienes permiso para terminar este proyecto.');
         }
         $proyecto->estado_proyecto = 'terminado';
-        $proyecto->fecha_envio_oc = now();
         $proyecto->save();
         return redirect()->route('proyectos.index')->with('success', 'Proyecto marcado como terminado exitosamente.');
     }
