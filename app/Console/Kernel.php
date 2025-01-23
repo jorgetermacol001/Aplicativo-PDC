@@ -12,8 +12,16 @@ class Kernel extends ConsoleKernel
      */
     protected function schedule(Schedule $schedule): void
     {
-        // $schedule->command('inspire')->hourly();
-        $schedule->command('notificar:almacenista')->dailyAt('08:30');
+        // Programar el comando para que se ejecute todos los lunes a las 8:00 AM
+        $schedule->command('notificar:almacenista')
+                ->mondays()
+                ->at('08:00')
+                ->when(function () {
+                    // Condiciones personalizadas antes de ejecutar el comando
+                    return \App\Models\Productos::where('estado_entrega', 'entrega parcial')
+                                                ->where('estado_proyecto', 'vigente')
+                                                ->exists();
+                });
     }
 
     /**

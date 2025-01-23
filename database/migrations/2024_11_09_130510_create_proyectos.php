@@ -16,6 +16,7 @@ return new class extends Migration
             $table->timestamps();
             $table->string('nombre', length: 100);
             $table->text('descripcion');
+            $table->date('fecha_fin')->nullable();
             $table->boolean('estado')->default(true);
             $table->enum('estado_proyecto', ['vigente','terminado'])->default('vigente');
 

@@ -58,7 +58,7 @@ class ProductosController extends Controller
             $query->where('estado_pago', $request->estado_pago);
         }
         if ($request->filled('fecha_inicio')) {
-            $query->where('created_at', [$request->fecha_inicio, $request->fecha_fin]);
+            $query->where('created_at', [$request->fecha_inicio]);
         }
         if($request->filled('fecha_fin')){
             $query->where('fecha_fin',  $request->fecha_fin);
@@ -90,7 +90,7 @@ class ProductosController extends Controller
         $usuariosSolicitantes =  auth()->id();
 
         // Obtenemos todos los proyectos
-        $proyectos = Proyecto::all();
+        $proyectos = Proyecto::where('estado_proyecto', 'vigente')->get();
     
         // Obtenemos solo los usuarios con el rol de 'aprobador'
         $usuariosAprobadores = User::role('aprobador')->get();

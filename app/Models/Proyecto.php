@@ -9,7 +9,7 @@ class Proyecto extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['nombre', 'descripcion', 'user_id, estado', 'estado_proyecto'];
+    protected $fillable = ['nombre', 'descripcion', 'user_id, estado',  'fecha_fin', 'estado_proyecto'];
 
     public function user()
     {
@@ -19,4 +19,8 @@ class Proyecto extends Model
     {
         return $this->hasMany(Productos::class);
     }
+
+    protected $casts = [
+        'fecha_fin' => 'datetime'       
+    ];
 }

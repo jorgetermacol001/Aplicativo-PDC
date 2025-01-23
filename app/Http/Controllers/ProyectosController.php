@@ -26,7 +26,12 @@ class ProyectosController extends Controller
                     // Filtrar en la base de datos
                     $query->whereRaw("LOWER(REPLACE(nombre, ' ', '')) LIKE ?", ['%' . str_replace(' ', '', $nombre) . '%']);
                 }
-            
+                if ($request->filled('fecha_inicio')) {
+                    $query->where('created_at', [$request->fecha_inicio]);
+                }
+                if($request->filled('fecha_fin')){
+                    $query->where('fecha_fin',  $request->fecha_fin);
+                }
                 // Aplicar filtro por estado del proyecto si se proporciona
                 if ($request->filled('estado_proyecto')) {
                     $query->where('estado_proyecto', $request->estado_proyecto);
@@ -139,6 +144,7 @@ class ProyectosController extends Controller
             abort(403, 'No tienes permiso para terminar este proyecto.');
         }
         $proyecto->estado_proyecto = 'terminado';
+        $proyecto->fecha_fin = date('Y-m-d')-now();
         $proyecto->save();
         return redirect()->route('proyectos.index')->with('success', 'Proyecto marcado como terminado exitosamente.');
     }

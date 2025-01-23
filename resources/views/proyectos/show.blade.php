@@ -35,6 +35,10 @@
                     <p><strong><i class="fas fa-clock text-orange"></i> Última actualización:</strong></p>
                     <p>{{ $proyecto->updated_at->format('d/m/Y H:i') }}</p>
                 </div>
+                <div class="col-md-6">
+                    <p><strong><i class="fas fa-clock text-orange"></i> Fecha de expiración:</strong></p>
+                    <p>{{ $proyecto->fecha_fin }}</p>
+                </div>
             </div>
         </div>
     </div>
