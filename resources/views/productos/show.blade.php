@@ -38,27 +38,50 @@
                                 </dt>
                                 <dd class="col-sm-7">{{ $producto->tipo_de_pago }}</dd>
                                 <dt class="col-sm-5 text-orange">
-                                    <i class="fas fa-calendar-alt"></i> Fecha de envío
+                                    <i class="fas fa-sticky-note"></i> Observaciones
+                                </dt>
+                                <dd class="col-sm-7">{{ $producto->observaciones }}</dd>
+                                <dt class="col-sm-5 text-orange">
+                                    <i class="fas fa-phone"></i> Contacto de Proveedores
+                                </dt>
+                                <dd class="col-sm-7">{{ $producto->contacto_proveedores }}</dd>
+                            </dl>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Fechas -->
+                <div class="col-md-6 mb-3">
+                    <div class="card">
+                        <div class="card-header bg-light text-orange">
+                            <strong><i class="fas fa-calendar-alt"></i> Fechas</strong>
+                        </div>
+                        <div class="card-body">
+                            <dl class="row mb-0">
+                                <dt class="col-sm-5 text-orange">
+                                    <i class="fas fa-calendar-alt"></i> Fecha de Envío
                                 </dt>
                                 <dd class="col-sm-7">{{ $producto->fecha_envio_oc }}</dd>
                                 <dt class="col-sm-5 text-orange">
-                                    <i class="fas fa-calendar-check"></i> Fecha de aprobación
+                                    <i class="fas fa-calendar-check"></i> Fecha de Aprobación
                                 </dt>
                                 <dd class="col-sm-7">{{ $producto->fecha_aprobacion_oc }}</dd>
                                 <dt class="col-sm-5 text-orange">
-                                    <i class="fas fa-file-invoice"></i> Fecha fin
+                                    <i class="fas fa-file-invoice"></i> Fecha Fin
                                 </dt>
                                 <dd class="col-sm-7">{{ $producto->fecha_fin }}</dd>
                                 <dt class="col-sm-5 text-orange">
-                                    <i class="fas fa-calendar-day"></i> Fecha de entrega de material
+                                    <i class="fas fa-calendar-day"></i> Fecha de Entrega de Material
                                 </dt>
                                 <dd class="col-sm-7">{{ $producto->fecha_entrega_materia }}</dd>
                             </dl>
                         </div>
                     </div>
                 </div>
+            </div>
 
-                <!-- Estados del producto -->
+            <!-- Estados del producto -->
+            <div class="row">
                 <div class="col-md-6 mb-3">
                     <div class="card">
                         <div class="card-header bg-light text-orange">
@@ -86,10 +109,8 @@
                         </div>
                     </div>
                 </div>
-            </div>
 
-            <!-- Roles Asociados -->
-            <div class="row">
+                <!-- Roles Asociados -->
                 <div class="col-md-6 mb-3">
                     <div class="card">
                         <div class="card-header bg-light text-orange">
@@ -113,9 +134,11 @@
                         </div>
                     </div>
                 </div>
+            </div>
 
-                <!-- Datos Adjuntos -->
-                <div class="col-md-6 mb-3">
+            <!-- Datos Adjuntos -->
+            <div class="row">
+                <div class="col-md-12 mb-3">
                     <div class="card">
                         <div class="card-header bg-light text-orange">
                             <strong><i class="fas fa-paperclip"></i> Datos Adjuntos</strong>

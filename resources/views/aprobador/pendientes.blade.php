@@ -29,7 +29,7 @@
                             <td>{{ $producto->created_at->format('d/m/Y H:i') }}</td>
                             <td class="text-center">
                                 {{-- Botón Revisar --}}
-                                <a href="{{ route('aprobador.show', $producto->id) }}" class="btn btn-orange btn-sm">
+                                <a href="{{ route('productos.show', $producto->id) }}" class="btn btn-orange btn-sm">
                                     <i class="fas fa-eye"></i> Revisar
                                 </a>
 
@@ -45,7 +45,7 @@
                                 @endif
 
                                 {{-- Boton Correcion --}}
-                                @if($producto->estado_oc === 'Compra solicitada')
+                                @if($producto->estado_oc === 'Compra solicitada' )
                                     <form method="POST" action="{{ route('aprobador.correcion', $producto->id) }}" style="display:inline-block;">
                                         @csrf
                                         @method('PATCH')
@@ -73,6 +73,17 @@
                                         @method('PATCH')
                                         <button type="submit" class="btn btn-sucess btn-sm" onclick="return confirm('¿Deseas realizar esta acción?');">
                                             <i class="fas fa-unlock"></i> Liberar pago
+                                        </button>
+                                    </form>
+                                @endif
+
+                                {{-- Botom Rechazar  --}}
+                                @if($producto->estado_oc === 'Compra solicitada' || $producto->estado_oc === 'OC corrección' || $producto->estado_oc === 'Compra corregida' || $producto->estado_oc === 'Revisado OC' || $producto->estado_oc === 'OC liberado' || $producto->estado_pago === 'pago programado' || $producto->estado_pago === 'pago liberado' || $producto->estado_oc === 'Compra aprobada')
+                                    <form method="POST" action="{{ route('aprobador.rechazar', $producto->id) }}" style="display:inline-block;">
+                                        @csrf
+                                        @method('PATCH')
+                                        <button type="submit" class="btn btn-danger btn-sm">
+                                            <i class="fas fa-times"></i> Rechazar
                                         </button>
                                     </form>
                                 @endif

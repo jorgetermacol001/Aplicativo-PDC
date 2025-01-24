@@ -60,6 +60,9 @@
                                 </td>
                                 <td>{{ $producto->created_at->format('d/m/Y H:i') }}</td>
                                 <td>
+                                    <a href="{{ route('productos.show', $producto->id) }}" class="btn btn-orange btn-sm">
+                                        <i class="fas fa-eye"></i> Revisar
+                                    </a>
                                     {{-- Mostrar acciones solo si el estado es producto aprobada --}}
                                     @if($producto->estado_oc === 'OC creada')
                                         <form action="{{ route('solicitante.pendientes', $producto->id) }}" method="POST" style="display: inline-block;">
@@ -76,8 +79,7 @@
                                         <button type="submit" class="btn btn-success btn-sm" onclick="return confirm('¿Deseas realizar esta acción?');">
                                             <i class="fas fa-check"></i> Compra Corregida
                                         </button>
-                                    @else
-                                        <span class="text-muted">Acción no disponible</span>
+
                                     @endif
                                 </td>
                             </tr>
