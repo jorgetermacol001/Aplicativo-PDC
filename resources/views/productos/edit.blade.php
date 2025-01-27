@@ -126,15 +126,18 @@
                     </div>
 
                     {{-- Enlaces de SharePoint --}}
-                    <div class="mt-3">
+                    <div class="mt-4">
                         <h5><i class="fas fa-link"></i> Enlaces de SharePoint</h5>
-                        <div id="sharepoint-links-container">
+                        <ul class="list-group">
                             @if($producto->enlaces)
                                 @foreach($producto->enlaces as $enlace)
-                                    <div class="d-flex align-items-center mb-2">
-                                        <a href="{{ $enlace->url_sharepoint }}" target="_blank" class="mr-2">
-                                            {{ $enlace->nombre_original }}
-                                        </a>
+                                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                                        <div>
+                                            <i class="fas fa-file-alt text-orange mr-2"></i>
+                                            <a href="{{ $enlace->url_sharepoint }}" target="_blank" class="text-dark">
+                                                {{ $enlace->nombre_original }}
+                                            </a>
+                                        </div>
                                         <form action="{{ route('productos.enlaces.delete', ['producto' => $producto->id, 'enlace' => $enlace->id]) }}" 
                                               method="POST" style="display:inline;">
                                             @csrf
@@ -144,10 +147,14 @@
                                                 <i class="fas fa-trash-alt"></i>
                                             </button>
                                         </form>
-                                    </div>
+                                    </li>
                                 @endforeach
+                            @else
+                                <li class="list-group-item text-muted">
+                                    <i class="fas fa-exclamation-circle"></i> No hay enlaces de SharePoint disponibles.
+                                </li>
                             @endif
-                        </div>
+                        </ul>
                     </div>
                 </div>
 
@@ -169,6 +176,7 @@
     <style>
         .text-orange { color: #fd7e14 !important; }
         .bg-orange { background-color: #fd7e14 !important; }
+        .list-group-item { display: flex; align-items: center; justify-content: space-between; }
         .card-body { background-color: #f7f7f7; }
         .btn-sm { font-size: 0.875rem; padding: 0.25rem 0.5rem; }
         textarea { resize: none; }
